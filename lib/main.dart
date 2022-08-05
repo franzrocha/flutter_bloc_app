@@ -34,16 +34,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<TaskBloc>(
           create: (_) => TaskBloc(),
         ),
-        BlocProvider<ThemeBloc>(
-          create: (_) => ThemeBloc(),
-        ),
+     
       ],
-      child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
-        final appTheme =
-            state.isDarkTheme! ? AppTheme.darkMode : AppTheme.lightMode;
+      child: BlocBuilder (builder: (context, state) {
         return MaterialApp(
           title: 'BloC Tasks App',
-          theme: AppThemes.appThemeData[appTheme],
+          // theme: AppThemes.appThemeData[appTheme],
           home: const TabsScreen(),
           onGenerateRoute: appRouter.onGenerateRoute,
         );
