@@ -79,7 +79,7 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
         .indexWhere((element) => element.id == event.task.id);
 
     if (pendingIndex == -1 && completedIndex == -1) {
-      // If Adding Task
+
       emit(
         state.copyWith(
             pendingTasks: (List.from(state.pendingTasks!)
@@ -94,7 +94,7 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
             removedTasks: state.removedTasks),
       );
     } else {
-      // If Editing Task
+
       int? favoriteIndex = state.favoriteTasks!
           .indexWhere((element) => element.id == event.task.id);
       emit(
@@ -166,7 +166,7 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
             removedTasks: state.removedTasks),
       );
     } else {
-      // Toggle from Unfavorite to Favorite
+
       emit(
         state.copyWith(
             pendingTasks: pendingIndex == -1
@@ -193,7 +193,7 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
         .indexWhere((element) => element.id == event.task.id);
 
     if (!event.task.isDone!) {
-      // Toggle from Complete to Incomplete
+
       int completedIndex = state.completedTasks!
           .indexWhere((element) => element.id == event.task.id);
       emit(
@@ -210,7 +210,7 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
             removedTasks: state.removedTasks),
       );
     } else {
-      // Toggle from Incomplete to Complete
+
       int pendingIndex = state.pendingTasks!
           .indexWhere((element) => element.id == event.task.id);
       emit(
@@ -231,7 +231,7 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
 
   void deleteTask(DeleteTask event, Emitter<TaskState> emit) {
     if (!event.task.isDeleted!) {
-      // Delete Forever
+
       int removedIndex = state.removedTasks!
           .indexWhere((element) => element.id == event.task.id);
       emit(
@@ -243,7 +243,7 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
               ..removeAt(removedIndex)),
       );
     } else {
-      // Delete to Recycle Bin
+
       int pendingIndex = state.pendingTasks!
           .indexWhere((element) => element.id == event.task.id);
       int? favoriteIndex = state.favoriteTasks!
