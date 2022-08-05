@@ -9,6 +9,8 @@ import 'package:path_provider/path_provider.dart';
 import 'app_router.dart';
 import 'app_themes.dart';
 
+import 'bloc/theme/theme_bloc.dart';
+import 'bloc/theme/theme_state.dart';
 import 'screens/tabs_screen.dart';
 
 void main() async {
@@ -36,10 +38,12 @@ class MyApp extends StatelessWidget {
         ),
      
       ],
-      child: BlocBuilder (builder: (context, state) {
+      child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+         final appTheme =
+            state.isDarkTheme! ? AppTheme.darkMode : AppTheme.lightMode;  
         return MaterialApp(
           title: 'BloC Tasks App',
-          // theme: AppThemes.appThemeData[appTheme],
+          theme: AppThemes.appThemeData[appTheme],
           home: const TabsScreen(),
           onGenerateRoute: appRouter.onGenerateRoute,
         );
