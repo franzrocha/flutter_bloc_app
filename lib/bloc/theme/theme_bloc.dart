@@ -1,27 +1,18 @@
+
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc_finals/bloc/theme/theme_state.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-abstract class ThemeEvent extends Equatable {
-  const ThemeEvent();
-
-  @override
-  List<Object> get props => [];
-}
-
-class ToggleTheme extends ThemeEvent {
-  final bool isDarkTheme;
-
-  const ToggleTheme({required this.isDarkTheme});
-
-  @override
-  List<Object> get props => [isDarkTheme];
-}
+part 'theme_event.dart';
+part 'theme_state.dart';
 
 class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
-  ThemeBloc() : super(const ThemeState(isDarkTheme: false)) {
-    on<ToggleTheme>((event, emit) {
-      emit(state.copyWith(isDarkTheme: event.isDarkTheme));
+  ThemeBloc() : super(const ThemeInitial(themeValue: false)) {
+    on<ThemeOnEvent>((event, emit) {
+      emit(const ThemeState(themeValue: true));
+    });
+
+    on<ThemeOffEvent>((event, emit) {
+      emit(const ThemeState(themeValue: false));
     });
   }
 
